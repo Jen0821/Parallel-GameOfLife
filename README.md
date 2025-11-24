@@ -1,1 +1,1 @@
-# Parallel-gol
+# Game-of-Life-Parallel
