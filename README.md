@@ -1,1 +1,1 @@
-# Game of Life in Parallel implementation
+# Game of Life in Parallel Implementation
