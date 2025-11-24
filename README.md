@@ -1,1 +1,1 @@
-# Game-of-Life-Parallel
+# Game of Life in Parallel implementation
