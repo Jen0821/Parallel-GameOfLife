@@ -2,15 +2,7 @@
 
 This project implements **Conway's Game of Life** cellular automaton using **Go (Golang)**. The core focus is on achieving **high-performance parallel simulation** using Go's built-in concurrency primitives: **Goroutines** and **Channels**. This approach enables efficient simulation and real-time visualization on large-scale grids.
 
-## Overview
-
-Conway's Game of Life is a zero-player game, meaning its evolution is determined by its initial state, requiring no further input. The grid of cells evolves based on simple rules:
-1.  Any live cell with fewer than two live neighbours dies, as if by underpopulation.
-2.  Any live cell with two or three live neighbours lives on to the next generation.
-3.  Any live cell with more than three live neighbours dies, as if by overpopulation.
-4.  Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.
-
-Our implementation parallelizes these computations across multiple Go routines.
+---
 
 ## 🎯 Key Technologies and Implementation
 
@@ -24,12 +16,16 @@ The simulation utilizes a **Distributor/Worker model** to divide the grid (board
 | **Data I/O** | **PGM (Portable Graymap)** | Used for loading initial states and saving final/intermediate states. |
 | **Domain** | **Closed Domain (Toroidal)** | Implements toric boundary conditions (pixels on opposite edges are connected). |
 
+---
+
 ## Initial State Example
 
 The simulation starts from an initial PGM image representing the live and dead cells on the grid.
 
 Here's an example of an initial board state:
-<img width="768" height="768" alt="image" src="https://github.com/user-attachments/assets/9302be28-d355-4a8e-88c7-02cfa51a4d29" />
+
+
+---
 
 ## ⚙️ Implemented Features (Step-by-Step)
 
@@ -50,7 +46,7 @@ The project was developed following the coursework guidelines, integrating seria
 
 ### 4. User Control Rules (Step 5)
 
-Interactive keyboard controls are processed by the main event loop, allowing dynamic interaction with the simulation:
+Implemented interactive keyboard controls processed by the main event loop:
 
 * **`s` (Save):** Saves the current board state as a PGM image (`ImageOutputComplete` event).
 * **`q` (Quit):** Completes the current turn, saves the final state as a PGM image, and terminates the program (`FinalTurnComplete` event).
@@ -59,10 +55,12 @@ Interactive keyboard controls are processed by the main event loop, allowing dyn
 ### 5. Real-Time Visualization (Step 6)
 
 * Integration with **SDL** to display the simulation in real-time within a dedicated window.
-* Utilizes **`CellFlipped`** and **`TurnComplete`** events to manage graphical updates efficiently. `CellFlipped` events are sent whenever a cell changes state, and `TurnComplete` events signify the end of a simulation step, refreshing the entire board visualization.
+* Utilizes **`CellFlipped`** and **`TurnComplete`** events to manage graphical updates efficiently.
     
     Here's an example of the real-time visualization:
-    ![Conway's Game of Life simulation running in real-time with an SDL window, showing cells evolving on a grid](https://image.pollinations.ai/prompt/Conway%27s%20Game%20of%20Life%20simulation%20running%20in%20real-time%20with%20an%20SDL%20window,%20showing%20cells%20evolving%20on%20a%20grid,%20minimalist,%20dark%20theme)
+    
+
+---
 
 ## ▶️ Running and Testing
 
