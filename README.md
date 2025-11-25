@@ -16,8 +16,7 @@ Our implementation parallelises these computations across multiple Go routines, 
 ## 📝 Final Coursework Report
 
 The full detailed analysis of the parallel implementation, including performance benchmarks and design rationale, is available in the final report.
-
-[](https://www.google.com/search?q=./report.pdf)
+[![Report Cover Image: Click to Download PDF](./report.jpg)](./report.pdf)
 
 ### Direct Link
 
