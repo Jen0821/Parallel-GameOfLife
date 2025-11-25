@@ -3,8 +3,6 @@
 This project implements Conway's Game of Life cellular automaton using Go (Golang).  
 It focuses on achieving **high-performance parallel simulation** using Goroutines & Channels, and extends into a **fully distributed architecture** using a Controller/Broker/Worker model with RPC networking.
 
----
-
 ## 🌟 Key Features & Highlights
 
 ### ⚡ High-Performance Parallel Core
@@ -26,9 +24,7 @@ It focuses on achieving **high-performance parallel simulation** using Goroutine
 - Pause / Resume  
 - Save intermediate state  
 - Graceful termination
-
----
-
+- 
 ## 💡 Overview: Conway's Game of Life
 
 Conway’s Game of Life is a zero-player automaton where each generation evolves based solely on the previous state.
@@ -40,8 +36,6 @@ Conway’s Game of Life is a zero-player automaton where each generation evolves
 4. Any dead cell with exactly 3 neighbours → **becomes alive**
 
 Our implementation parallelizes and distributes these computations for maximum throughput.
-
----
 
 ## 🧱 Key Technologies and Architecture
 
@@ -66,8 +60,6 @@ The system has **two layers**:
 | Data I/O | PGM images | Load/save board states |
 | Domain | Toroidal Grid | Wrap-around edges |
 
----
-
 ## 🏗 Distributed System Architecture
 
 ### **Local Controller**
@@ -89,8 +81,6 @@ The system has **two layers**:
 - Performs Halo Exchange with neighbor workers  
 - Returns computed slice via RPC
 
----
-
 ## 📈 Performance and Scalability
 
 ### Parallel Efficiency (Local)
@@ -105,8 +95,6 @@ The system has **two layers**:
 ### Fault Tolerance (Considered)
 - System should maintain state if a new Controller reconnects  
 - Worker failure handling out of current scope but considered
-
----
 
 ## ⚙️ Implemented Features (Development Stages)
 
@@ -130,8 +118,6 @@ The system has **two layers**:
 ### 5. **Real-Time Visualization (SDL)**
 - CellFlipped events for single-pixel changes  
 - TurnComplete to refresh entire grid
-
----
 
 ## ▶️ Setup and Running
 
