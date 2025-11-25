@@ -17,7 +17,6 @@ Our implementation parallelizes these computations across multiple Go routines.
 The full analysis and implementation details for the parallel Game of Life project can be found in the official report.
 
 [![Report Cover Image: Click to Download PDF](./report.jpg)](./report.pdf)
-
 ### Direct Link
 [Download the Full PDF Report Here](./report.pdf)
 
