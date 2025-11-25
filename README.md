@@ -1,88 +1,173 @@
 # 🚀 Go-Parallel-GameOfLife
 
-This project implements **Conway's Game of Life** cellular automaton using **Go (Golang)**. The core focus is on achieving **high-performance parallel simulation** using Go's built-in concurrency primitives: **Goroutines** and **Channels**. This approach enables efficient simulation and real-time visualization on large-scale grids.
+This project implements Conway's Game of Life cellular automaton using Go (Golang).  
+It focuses on achieving **high-performance parallel simulation** using Goroutines & Channels, and extends into a **fully distributed architecture** using a Controller/Broker/Worker model with RPC networking.
 
-## Overview
+---
 
-Conway's Game of Life is a zero-player game, meaning its evolution is determined by its initial state, requiring no further input. The grid of cells evolves based on simple rules:
-1.  Any live cell with fewer than two live neighbours dies, as if by underpopulation.
-2.  Any live cell with two or three live neighbours lives on to the next generation.
-3.  Any live cell with more than three live neighbours dies, as if by overpopulation.
-4.  Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.
+## 🌟 Key Features & Highlights
 
-Our implementation parallelizes these computations across multiple Go routines.
+### ⚡ High-Performance Parallel Core
+- Distributor/Worker parallel pattern using Goroutines
+- Efficient stripe-based board division for multi-core CPUs
 
-## 📝 Final Coursework Report
+### 🌐 Scalable Distributed System
+- Local Controller ↔ Broker ↔ Worker Nodes  
+- Remote workers (simulated AWS nodes) compute board slices via RPC
 
-The full detailed analysis of the parallel implementation, including performance benchmarks and design rationale, is available in the final report.
+### 🖥 Real-Time Visualization
+- SDL2-based live rendering of the simulation
 
-[![Report Cover Image: Click to Download PDF](./report.jpg)](./report.pdf)
-### Direct Link
-[Download the Full PDF Report Here](./report.pdf)
+### 🔄 Robust State Management
+- Toroidal (closed) grid domain  
+- Efficient change reporting via channels/events
 
-## 🎯 Key Technologies and Implementation
+### 🎮 User Interaction
+- Pause / Resume  
+- Save intermediate state  
+- Graceful termination
 
-The simulation utilizes a **Distributor/Worker model** to divide the grid (board) into sections, distributing the computation load across multiple Goroutines running on a single machine.
+---
+
+## 💡 Overview: Conway's Game of Life
+
+Conway’s Game of Life is a zero-player automaton where each generation evolves based solely on the previous state.
+
+### Rules
+1. Any live cell with < 2 live neighbours → **dies** (underpopulation)  
+2. Any live cell with 2 or 3 neighbours → **lives**  
+3. Any live cell with > 3 neighbours → **dies** (overpopulation)  
+4. Any dead cell with exactly 3 neighbours → **becomes alive**
+
+Our implementation parallelizes and distributes these computations for maximum throughput.
+
+---
+
+## 🧱 Key Technologies and Architecture
+
+The system has **two layers**:
+
+### **1. Local Parallel Layer**
+- Distributor/Worker goroutine model
+- Multi-core optimized turn computation
+
+### **2. Distributed Network Layer**
+- Controller/Broker/Worker nodes over RPC
+- Sliced board distribution
+- Halo exchange communication for neighbor consistency
 
 | Feature | Technology / Concept | Description |
-| :--- | :--- | :--- |
-| **Primary Language** | Go (Golang) | Used for entire application logic. |
-| **Concurrency** | **Goroutines** & **Channels** | Implements the **Distributor/Worker** pattern for parallel updates. |
-| **Visualization** | **SDL (Simple DirectMedia Layer)** | Handles the real-time graphical display of the grid state. |
-| **Data I/O** | **PGM (Portable Graymap)** | Used for loading initial states and saving final/intermediate states. |
-| **Domain** | **Closed Domain (Toroidal)** | Implements toric boundary conditions (pixels on opposite edges are connected). |
+|--------|----------------------|-------------|
+| Primary Language | Go (Golang) | Full project implemented in Go |
+| Concurrency | Goroutines & Channels | Local parallel Distributor/Worker model |
+| Distribution | RPC networking | Controller/Broker/Worker communication |
+| System Model | Controller/Broker/Worker | Scales across machines/nodes |
+| Visualization | SDL2 | Real-time graphics |
+| Data I/O | PGM images | Load/save board states |
+| Domain | Toroidal Grid | Wrap-around edges |
 
-## Initial State Example
+---
 
-The simulation starts from an initial PGM image representing the live and dead cells on the grid.
+## 🏗 Distributed System Architecture
 
-Here's an example of an initial board state:
-![Initial Game of Life board state loaded from a PGM image](https://image.pollinations.ai/prompt/Initial%20Game%20of%20Life%20board%20state%20loaded%20from%20a%20PGM%20image,%20black%20background%20with%20white%20pixels%20for%20live%20cells)
+### **Local Controller**
+- Handles I/O  
+- Captures keypresses (`s`, `p`, `q`)  
+- Displays board via SDL  
+- Initiates game by connecting to Broker
 
-## ⚙️ Implemented Features (Step-by-Step)
+### **Broker**
+- Central orchestrator  
+- Receives commands from Controller  
+- Slices the global board  
+- Dispatches tasks to Worker Nodes  
+- Aggregates turn results
 
-The project was developed following the coursework guidelines, integrating serial implementation with progressive parallel features, I/O, and user control.
+### **GOL Worker (Compute Node)**
+- Computes assigned board slice  
+- Uses goroutine parallelism internally  
+- Performs Halo Exchange with neighbor workers  
+- Returns computed slice via RPC
 
-### 1. Parallel Core Logic (Steps 1 & 2)
+---
 
-* **Serial Baseline:** Initial single-threaded implementation of the Game of Life rules.
-* **Parallelization:** Implementation of the **Distributor** and **Worker** model. The Distributor divides the board into stripes and assigns them to a pool of **Worker Goroutines** (as specified by `gol.Params.Threads`) to calculate the next state in parallel.
+## 📈 Performance and Scalability
 
-### 2. State Reporting and Events (Step 3)
+### Parallel Efficiency (Local)
+- Distributor/Worker model uses all CPU cores
+- Significant speedup vs serial baseline
 
-* **Alive Count Ticker:** Uses a **Ticker** to report the total number of **Alive Cells** via the `AliveCellsCount` event every **2 seconds**. This provides real-time feedback on the simulation's activity.
+### Distributed Scalability
+- Horizontal scaling via remote worker nodes
+- Turn-processing time decreases as N workers increases
+- Reduced network cost via halo-only communication
 
-### 3. Image Output (Step 4)
+### Fault Tolerance (Considered)
+- System should maintain state if a new Controller reconnects  
+- Worker failure handling out of current scope but considered
 
-* Implements logic to output the final state of the board as a **PGM image** after all turns have been completed. This allows for persistent storage of simulation results.
+---
 
-### 4. User Control Rules (Step 5)
+## ⚙️ Implemented Features (Development Stages)
 
-Interactive keyboard controls are processed by the main event loop, allowing dynamic interaction with the simulation:
+### 1. **Parallel Core Logic**
+- Serial → parallel migration  
+- Board divided into stripes for worker goroutines  
 
-* **`s` (Save):** Saves the current board state as a PGM image (`ImageOutputComplete` event).
-* **`q` (Quit):** Completes the current turn, saves the final state as a PGM image, and terminates the program (`FinalTurnComplete` event).
-* **`p` (Pause/Resume):** Toggles the simulation state between running and paused (`StateChange` event).
+### 2. **State Reporting & Events**
+- AliveCellsCount sent every 2 seconds  
+- RPC communication between Controller/Broker/Workers  
 
-### 5. Real-Time Visualization (Step 6)
+### 3. **Image Output & Persistent State**
+- Load initial PGM  
+- Save intermediate/final PGM images  
 
-* Integration with **SDL** to display the simulation in real-time within a dedicated window.
-* Utilizes **`CellFlipped`** and **`TurnComplete`** events to manage graphical updates efficiently. `CellFlipped` events are sent whenever a cell changes state, and `TurnComplete` events signify the end of a simulation step, refreshing the entire board visualization.
-    
-    Here's an example of the real-time visualization:
-    ![Conway's Game of Life simulation running in real-time with an SDL window, showing cells evolving on a grid](https://image.pollinations.ai/prompt/Conway%27s%20Game%20of%20Life%20simulation%20running%20in%20real-time%20with%20an%20SDL%20window,%20showing%20cells%20evolving%20on%20a%20grid,%20minimalist,%20dark%20theme)
+### 4. **User Control (Interactive)**
+- `s` → save state  
+- `q` → complete turn & save final image, then exit  
+- `p` → pause / resume  
 
-## ▶️ Running and Testing
+### 5. **Real-Time Visualization (SDL)**
+- CellFlipped events for single-pixel changes  
+- TurnComplete to refresh entire grid
 
-To run the implementation and tests (as suggested in the coursework):
+---
 
+## ▶️ Setup and Running
+
+### **Prerequisites**
+Install Go and SDL development libraries.
+
+````markdown
+### macOS (Homebrew)
 ```bash
-# Run the program with SDL visualization (Step 6)
+brew install sdl2
+```
+
+### Linux (Ubuntu/Debian)
+```bash
+sudo apt-get install libsdl2-dev
+```
+
+### Windows
+```bash
+# Requires MinGW installation and manual SDL2 linking
+# Refer to the Go SDL documentation for detailed platform-specific setup
+```
+
+## 🚀 Running
+
+### Run the program (Controller/Broker/Workers assumed running or mocked)
+```bash
 go run .
+```
 
-# Run tests with the SDL window to test visualization and keyboard control (Step 5 & 6)
-# Ensure SDL development libraries are installed on your system.
+### Test visualization + keyboard controls
+```bash
 go test ./tests -v -run TestKeyboard -sdl
+```
 
-# Run tests with race detector for thread safety checks (Step 6)
+### Test parallel core with race detector
+```bash
 go test ./tests -v -race
+```
