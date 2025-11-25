@@ -138,7 +138,6 @@ The system has **two layers**:
 ### **Prerequisites**
 Install Go and SDL development libraries.
 
-````markdown
 ### macOS (Homebrew)
 ```bash
 brew install sdl2
