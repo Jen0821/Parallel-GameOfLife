@@ -31,8 +31,6 @@ The simulation starts from an initial PGM image representing the live and dead c
 Here's an example of an initial board state:
 <img width="768" height="768" alt="image" src="https://github.com/user-attachments/assets/9302be28-d355-4a8e-88c7-02cfa51a4d29" />
 
-![Initial Game of Life board state loaded from a PGM image](https://image.pollinations.ai/prompt/Initial%20Game%20of%20Life%20board%20state%20loaded%20from%20a%20PGM%20image,%20black%20background%20with%20white%20pixels%20for%20live%20cells)
-
 ## ⚙️ Implemented Features (Step-by-Step)
 
 The project was developed following the coursework guidelines, integrating serial implementation with progressive parallel features, I/O, and user control.
