@@ -25,13 +25,13 @@ The full detailed analysis of the parallel implementation, including performance
 
 ## 🎯 Key Technologies and Implementation
 
-The simulation utilises a **Distributor/Worker model** to divide the grid (board) into sections, distributing the computation load across multiple Goroutines.
+The simulation utilizes a **Distributor/Worker model** to divide the grid (board) into sections, distributing the computation load across multiple Goroutines.
 
 | Feature | Technology / Concept | Description |
 | :--- | :--- | :--- |
 | **Primary Language** | Go (Golang) | Used for entire application logic. |
 | **Concurrency** | **Goroutines** & **Channels** | Implements the **Distributor/Worker** pattern for parallel updates. |
-| **Synchronization** | **`sync.Mutex`** (`mu`) | Employed to safeguard shared variables (`world` and `turn`) from **data races**. |
+| **Synchronisation** | **`sync.Mutex`** (`mu`) | Employed to safeguard shared variables (`world` and `turn`) from **data races**. |
 | **Boundary Handling** | **`worldCopyForWorkers`** | The Distributor passes a duplicate world state, including adjacent edge cells, to Workers to restore **task isolation** for local computation. |
 | **Visualization** | **SDL (Simple DirectMedia Layer)** | Handles the real-time graphical display of the grid state. |
 | **Data I/O** | **PGM (Portable Graymap)** | Used for loading initial states and saving final/intermediate states. |
@@ -65,7 +65,7 @@ Benchmark tests were executed on a Linux machine with **20 physical cores**, run
 ### Scaling and Constraints
 
   * **Significant Speedup:** The parallel implementation reduced the mean runtime from **83.5 seconds** (serial) to **12.6 seconds** (parallel with 15 threads), achieving an **85%** performance improvement.
-  * **Limiting Factors:** Performance stabilization occurred after about 13 threads. This is due to:
+  * **Limiting Factors:** Performance stabilisation occurred after about 13 threads. This is due to:
     1.  The machine's hardware limit (**20 physical CPU cores**).
     2.  The **I/O part** (PGM file handling) remains a **serial execution bottleneck**, limiting maximum achievable speedup.
 
@@ -100,12 +100,12 @@ Interactive keyboard controls are processed by the main event loop:
   * **`q` (Quit):** Completes the current turn, saves the final state as a PGM image, and terminates the program.
   * **`p` (Pause/Resume):** Toggles the simulation state between running and paused (`StateChange` event).
 
-### 5\. Real-Time Visualization (Step 6)
+### 5\. Real-Time Visualisation (Step 6)
 
   * Integration with **SDL** to display the simulation in real-time within a dedicated window.
   * Utilizes **`CellFlipped`** (sent by Workers) and **`TurnComplete`** events to manage graphical updates efficiently.
 
-Here's an example of the real-time visualization:
+Here's an example of the real-time visualisation:
 
 ## ▶️ Setup
 
@@ -137,10 +137,10 @@ sudo apt-get install libsdl2-dev
 To run the implementation and tests:
 
 ```bash
-# Run the program with SDL visualization (Step 6)
+# Run the program with SDL visualisation (Step 6)
 go run .
 
-# Run tests with the SDL window to test visualization and keyboard control (Step 5 & 6)
+# Run tests with the SDL window to test visualisation and keyboard control (Step 5 & 6)
 # Ensure SDL development libraries are installed on your system.
 go test ./tests -v -run TestKeyboard -sdl
 
