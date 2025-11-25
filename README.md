@@ -1,4 +1,4 @@
-# 🚀 Go-Parallel-GameOfLife (Conway's Game of Life Parallel Implementation)
+# 🚀 Go-Parallel-GameOfLife
 
 This project implements **Conway's Game of Life** cellular automaton using **Go (Golang)**. The core focus is on achieving **high-performance parallel simulation** using Go's built-in concurrency primitives: **Goroutines** and **Channels**. This approach enables efficient simulation and real-time visualization on large-scale grids.
 
