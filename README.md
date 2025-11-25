@@ -96,7 +96,7 @@ sudo apt-get install libsdl2-dev
 
 ## 🚀 Running and Testing
 
-To run the implementation and tests (as suggested in the coursework):
+To run the implementation and tests:
 
 ```bash
 # Run the program with SDL visualization (Step 6)
