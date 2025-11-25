@@ -73,7 +73,28 @@ Interactive keyboard controls are processed by the main event loop, allowing dyn
 Here's an example of the real-time visualization:
 ![Conway's Game of Life simulation running in real-time with an SDL window, showing cells evolving on a grid](https://image.pollinations.ai/prompt/Conway%27s%20Game%20of%20Life%20simulation%20running%20in%20real-time%20with%20an%20SDL%20window,%20showing%20cells%20evolving%20on%20a%20grid,%20minimalist,%20dark%20theme)
 
-## ▶️ Running and Testing
+## ▶️ Setup
+
+### **Prerequisites**
+Install Go and SDL development libraries.
+
+### macOS (Homebrew)
+```bash
+brew install sdl2
+```
+
+### Linux (Ubuntu/Debian)
+```bash
+sudo apt-get install libsdl2-dev
+```
+
+### Windows
+```bash
+# Requires MinGW installation and manual SDL2 linking
+# Refer to the Go SDL documentation for detailed platform-specific setup
+```
+
+## 🚀 Running and Testing
 
 To run the implementation and tests (as suggested in the coursework):
 
