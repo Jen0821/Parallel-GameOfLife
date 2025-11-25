@@ -14,7 +14,7 @@ Our implementation parallelizes these computations across multiple Go routines.
 
 ## 📝 Final Coursework Report
 
-The full analysis and implementation details for the parallel Game of Life project can be found in the official report.
+The full detailed analysis of the parallel implementation, including performance benchmarks and design rationale, is available in the final report.
 
 [![Report Cover Image: Click to Download PDF](./report.jpg)](./report.pdf)
 ### Direct Link
