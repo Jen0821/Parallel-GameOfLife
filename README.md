@@ -17,10 +17,9 @@ Our implementation parallelises these computations across multiple Go routines, 
 
 The full detailed analysis of the parallel implementation, including performance benchmarks and design rationale, is available in the final report.
 
-[![Report Cover Image: Click to Download PDF](./report.jpg)](./report.pdf)
-### Direct Link
+[![Report Preview](https://github.com/Jen0821/Parallel-GameOfLife/blob/main/report.jpg)](https://github.com/Jen0821/Parallel-GameOfLife/blob/main/report.pdf)
 
-[Download the Full PDF Report Here](https://www.google.com/search?q=./report.pdf)
+**Click the image to view the full report.**
 
 ## 🎯 Key Technologies and Implementation
 
