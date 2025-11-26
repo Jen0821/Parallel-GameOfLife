@@ -45,13 +45,13 @@ The project employs a robust multi-goroutine architecture, orchestrated by the c
 
 This diagram shows the core parallel structure, where the **Distributor** manages the **Workers** and communicates state reporting via the `AliveCellsCount` event to the testing component (`TestAlive`).
 
-[Image: cw_diagrams-Parallel_3.DTrO2P65.png]
+![Preview](https://github.com/Jen0821/Parallel-GameOfLife/blob/main/diagrams1.jpg)
 
 #### I/O Goroutine Communication
 
 This diagram illustrates how the main process (`Distributor`) interacts with the dedicated **I/O Goroutine** for file handling and control signals, including the final PGM output file for testing (`TestPgm`).
 
-[Image: cw_diagrams-Parallel_4.tQTeh1L5.png]
+![Preview](https://github.com/Jen0821/Parallel-GameOfLife/blob/main/diagrams2.jpg)
 
 ### Goroutine Roles and Communication
 
@@ -133,7 +133,7 @@ Install Go and SDL development libraries.
 
 The project requires a proper development environment. This image shows an example of a correct JDK installation (`homebrew OpenJDK 17.0.14`) being registered in a project setting.
 
-[Image: Screenshot 2025-11-26 at 1.48.33 am.png]
+![Preview](https://github.com/Jen0821/Parallel-GameOfLife/blob/main/diagrams3.jpg)
 
 ### macOS (Homebrew)
 
