@@ -87,7 +87,7 @@ The simulation starts from an initial PGM image representing the live and dead c
 
 Here's an example of an initial board state:
 
-[Image: Initial PGM image file name here]
+![Preview](https://github.com/Jen0821/Parallel-GameOfLife/blob/main/Initial-State.jpg)
 
 ## ⚙️ Implemented Features (Step-by-Step)
 
@@ -121,7 +121,7 @@ Interactive keyboard controls are processed by the main event loop:
 
 Here's an example of the real-time visualisation:
 
-[Image: SDL Visualisation image file name here]
+![Preview](https://github.com/Jen0821/Parallel-GameOfLife/blob/main/SDL-Visualisation.jpg)
 
 ## ▶️ Setup
 
